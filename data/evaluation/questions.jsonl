@@ -1,0 +1,6 @@
+{"question":"Which standard applies to an electric kettle for home use?","language":"en","expected_standard":"IS 367:1993","should_abstain":false}
+{"question":"घरेलू प्रेशर कुकर के लिए कौन सा मानक है?","language":"hi","expected_standard":"IS 2347:2023","should_abstain":false}
+{"question":"Which standard covers toothpaste sampling and tests?","language":"en","expected_standard":"IS 6356:2021","should_abstain":false}
+{"question":"What is the exact current government fee for a product not in this corpus?","language":"en","expected_standard":"","should_abstain":true}
+{"question":"Which standard covers sandals and slippers?","language":"en","expected_standard":"IS 6721:2023","should_abstain":false}
+
