@@ -95,10 +95,11 @@ and falls back to a grounded local summary or abstention—not an uncited answer
 
 ## Ingestion
 
-The [combined BIS prototype dataset](data/sources/BIS_Prototype_500_Entries_Combined.pdf)
-contains 500 fictional product records across 10 categories and an earlier
-21-record reference appendix. The prototype records, certificates and licences
-are synthetic demo fixtures, not official BIS records.
+The [combined BIS prototype dataset](data/sources/BIS_Prototype_and_Reference_521_Records.jsonl)
+contains 521 JSONL records: 500 fictional product records across 10 categories
+and 21 earlier reference-standard records. The prototype records, certificates
+and licences are synthetic demo fixtures, not official BIS records. Use the
+`is_synthetic` and `source_type` fields to distinguish the two groups.
 
 Controlled ingestion accepts PDF, HTML, Markdown, text, CSV, JSON and JSONL,
 with a 10 MB default limit. Metadata fields include document/version identifiers,
