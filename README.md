@@ -95,6 +95,11 @@ and falls back to a grounded local summary or abstention—not an uncited answer
 
 ## Ingestion
 
+The [combined BIS prototype dataset](data/sources/BIS_Prototype_500_Entries_Combined.pdf)
+contains 500 fictional product records across 10 categories and an earlier
+21-record reference appendix. The prototype records, certificates and licences
+are synthetic demo fixtures, not official BIS records.
+
 Controlled ingestion accepts PDF, HTML, Markdown, text, CSV, JSON and JSONL,
 with a 10 MB default limit. Metadata fields include document/version identifiers,
 title, standard number, language, category, source type and URL.
@@ -172,4 +177,3 @@ infra/     Reserved for deployment-specific manifests
   adapters are present, but production indexing requires a running service and key.
 - Hindi UI coverage focuses on primary navigation and core actions; remaining
   explanatory content should be translated before public launch.
-
