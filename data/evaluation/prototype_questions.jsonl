@@ -1,0 +1,14 @@
+{"question":"What does the supplied dataset say about rice flour?","expected_standard":"DEMO-IS-FOD-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about laptop computer?","expected_standard":"DEMO-IS-ELN-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about domestic plug?","expected_standard":"DEMO-IS-ELC-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about Portland cement?","expected_standard":"DEMO-IS-CON-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about cotton yarn?","expected_standard":"DEMO-IS-TEX-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about passenger-car tyre?","expected_standard":"DEMO-IS-AUT-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about laundry detergent powder?","expected_standard":"DEMO-IS-CHE-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about hexagon bolt?","expected_standard":"DEMO-IS-MEC-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about examination glove?","expected_standard":"DEMO-IS-MED-001:2024","is_synthetic":true}
+{"question":"What does the supplied dataset say about spade?","expected_standard":"DEMO-IS-AGR-001:2024","is_synthetic":true}
+{"question":"What is the licence status and holder for DEMO-LIC-FOD-001?","expected_standard":"DEMO-IS-FOD-001:2024","is_synthetic":true,"answer_contains":"Status: Active"}
+{"question":"What does IS 3024:2015 cover?","expected_standard":"IS 3024:2015","is_synthetic":false,"answer_contains":"transformer cores"}
+{"question":"Explain the scope of IS 13252 (Part 1):2010","expected_standard":"IS 13252 (Part 1):2010","is_synthetic":false,"answer_contains":"not included in the public preview"}
+{"question":"Show the status for DEMO-LIC-FOD-999","should_abstain":true}
