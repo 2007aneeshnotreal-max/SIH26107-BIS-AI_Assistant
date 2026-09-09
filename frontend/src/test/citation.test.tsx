@@ -1,0 +1,3 @@
+import {render,screen} from '@testing-library/react';import {describe,expect,it} from 'vitest';import CitationCard from '../components/CitationCard'
+describe('CitationCard',()=>{it('exposes source identity and excerpt',()=>{render(<CitationCard citation={{id:1,ordinal:1,label:'Scope',source_title:'Electric kettles',document_id:'DEMO-STD-001',standard_number:'IS 367:1993',section:'1 Scope',page:null,source_url:'',source_type:'demo',excerpt:'Covers household electric kettles.'}}/>);expect(screen.getByText('IS 367:1993')).toBeInTheDocument();expect(screen.getByText(/DEMO-STD-001/)).toBeInTheDocument();expect(screen.getByText('View source excerpt')).toBeInTheDocument()})})
+

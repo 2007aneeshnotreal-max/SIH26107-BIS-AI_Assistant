@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment: {POSTGRES_DB: manaksetu, POSTGRES_USER: manaksetu, POSTGRES_PASSWORD: manaksetu}
+    ports: ["5432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    healthcheck: {test: ["CMD-SHELL", "pg_isready -U manaksetu"], interval: 5s, timeout: 3s, retries: 10}
+  qdrant:
+    image: qdrant/qdrant:v1.12.5
+    ports: ["6333:6333", "6334:6334"]
+    volumes: ["qdrant_data:/qdrant/storage"]
+  backend:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    env_file: .env
+    environment: {DATABASE_URL: "postgresql://manaksetu:manaksetu@postgres:5432/manaksetu", QDRANT_URL: "http://qdrant:6333"}
+    ports: ["8000:8000"]
+    depends_on: {postgres: {condition: service_healthy}, qdrant: {condition: service_started}}
+  frontend:
+    build: {context: ., dockerfile: frontend/Dockerfile}
+    ports: ["5173:80"]
+    depends_on: [backend]
+volumes: {postgres_data: {}, qdrant_data: {}}
+
