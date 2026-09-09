@@ -1,4 +1,5 @@
 import re
+import json
 import time
 from dataclasses import dataclass
 from .gemini import AIProviderError, MockGeminiProvider, get_ai_provider
@@ -70,7 +71,15 @@ class RagAnswerService:
             retrieved = []
         evidence = [{"source_id": f"chunk:{x.chunk.id}", "standard_number": x.chunk.document.standard_number,
                      "title": x.chunk.document.title, "section": x.chunk.section, "page": x.chunk.page,
-                     "text": x.chunk.text, "score": x.score} for x in retrieved]
+                     "text": x.chunk.text, "score": x.score,
+                     "source_type": x.chunk.document.source_type,
+                     "is_synthetic": x.chunk.metadata.get("is_synthetic", False),
+                     "provenance": x.chunk.metadata.get("provenance", {})} for x in retrieved]
+        for item, source in zip(evidence, retrieved):
+            if source.chunk.metadata.get("record_id"):
+                record = json.loads(source.chunk.document.content)
+                item["fields"] = record.get(source.chunk.section.split()[0], {})
+                item["product_name"] = record["product_name"]
         try:
             output = self.provider.generate(question=question, evidence=evidence, language=language, intent=intent)
             provider_error = None
@@ -88,6 +97,10 @@ class RagAnswerService:
         citations = [x for x in retrieved if f"chunk:{x.chunk.id}" in cited_ids]
         if output.get("citations") and not citations:
             output = {"answer": "The generated answer could not be validated against retrieved evidence.", "confidence": 0, "citations": [], "abstain": True}
+        if any(x.chunk.metadata.get("is_synthetic") for x in citations):
+            notice = ("स्रोत: दिया गया काल्पनिक डेटासेट; आधिकारिक BIS मार्गदर्शन नहीं।"
+                      if language == "hi" else "Source: supplied synthetic dataset; not official BIS guidance.")
+            output["answer"] = output["answer"] + "\n\n" + notice
         generated_steps = [str(step).strip() for step in output.get("next_steps", []) if str(step).strip()][:8]
         roadmap = MANUFACTURING_ROADMAP.get(language, MANUFACTURING_ROADMAP["en"])
         if intent == "manufacturing_roadmap":

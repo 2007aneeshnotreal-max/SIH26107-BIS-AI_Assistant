@@ -101,6 +101,20 @@ and 21 earlier reference-standard records. The prototype records, certificates
 and licences are synthetic demo fixtures, not official BIS records. Use the
 `is_synthetic` and `source_type` fields to distinguish the two groups.
 
+Load these records into the assistant's knowledge base:
+
+```bash
+python backend/manage.py migrate
+python backend/manage.py ingest_sources --path data/sources/BIS_Prototype_and_Reference_521_Records.jsonl
+```
+
+The importer reads the nested product, standards, certification and consumer
+fields into searchable passages with provenance. Gemini receives the retrieved
+passages when answering; this updates the knowledge base without fine-tuning
+model weights. Synthetic answers are labelled, and reference summaries retain
+their original access limitations. Repeating an unchanged import preserves
+existing citations; changed records require a higher `version`.
+
 Controlled ingestion accepts PDF, HTML, Markdown, text, CSV, JSON and JSONL,
 with a 10 MB default limit. Metadata fields include document/version identifiers,
 title, standard number, language, category, source type and URL.
