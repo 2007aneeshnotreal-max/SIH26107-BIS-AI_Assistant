@@ -95,6 +95,12 @@ and falls back to a grounded local summary or abstention—not an uncited answer
 
 ## Ingestion
 
+The [combined BIS prototype dataset](data/sources/BIS_Prototype_and_Reference_521_Records.jsonl)
+contains 521 JSONL records: 500 fictional product records across 10 categories
+and 21 earlier reference-standard records. The prototype records, certificates
+and licences are synthetic demo fixtures, not official BIS records. Use the
+`is_synthetic` and `source_type` fields to distinguish the two groups.
+
 Controlled ingestion accepts PDF, HTML, Markdown, text, CSV, JSON and JSONL,
 with a 10 MB default limit. Metadata fields include document/version identifiers,
 title, standard number, language, category, source type and URL.
@@ -102,6 +108,26 @@ title, standard number, language, category, source type and URL.
 ```bash
 python backend/manage.py ingest_sources --path data/samples
 ```
+
+The supplied BIS India RAG Dataset v2 ZIP can be loaded as labelled retrieval
+evidence. This does not fine-tune Gemini weights; it makes the records and
+source chunks available to the existing grounded retriever:
+
+```bash
+python backend/manage.py ingest_bis_dataset --path C:\path\to\data.zip
+```
+
+The importer preserves the dataset's live-verification warnings, stores the
+records as user-provided demo evidence, and is safe to run again because it
+updates the same document and chunk identifiers.
+
+The separate citation-document ZIP can be loaded with:
+
+```bash
+python backend/manage.py ingest_citation_dataset --path C:\path\to\citation-data.zip
+```
+
+This imports the supplied PDF/DOCX documents as page-aware citation evidence.
 
 Demo records are intentionally summaries; restricted BIS documents are neither
 scraped nor redistributed. For real deployment, ingest only material for which
@@ -172,4 +198,3 @@ infra/     Reserved for deployment-specific manifests
   adapters are present, but production indexing requires a running service and key.
 - Hindi UI coverage focuses on primary navigation and core actions; remaining
   explanatory content should be translated before public launch.
-
