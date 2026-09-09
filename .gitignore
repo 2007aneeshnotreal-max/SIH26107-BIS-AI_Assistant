@@ -7,5 +7,6 @@ db.sqlite3
 htmlcov/
 node_modules/
 frontend/dist/
+.vite/
 *.tsbuildinfo
 .DS_Store
